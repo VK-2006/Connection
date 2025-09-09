@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Application Form</title>
+  <style>
+    .form {
+      border: 10px black solid;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      padding: 15px;
+      width: fit-content;
+    }
+    .head {
+      font-size: 25px;
+    }
+    #heading {
+      height: 5em;
+      text-align: center;
+    }
+    .info {
+      height: 80%;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <form class="form">
+    <div class="head">
+      <div id="heading"><h1>Students Application Form</h1></div>
+      <div class="info">
+        <label for="name">Name:
+          <input type="text" id="name">
+        </label>
+        <br><br>
+        <label for="age">Age:
+          <input type="number" id="age">
+        </label>
+        <br><br>
+        <label for="dob">Date-Of-Birth:
+          <input type="date" id="dob">
+        </label>
+        <br><br>
+        <label for="address">Address:
+          <input type="text" id="address">
+        </label>
+        <br><br>
+        <label for="mno">Mobile number:
+          <input type="number" id="mno">
+        </label>
+        <br><br>
+        <label for="alno">Alternate Mobile Number:
+          <input type="number" id="alno">
+        </label>
+        <br><br>
+        <button type="button" id="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+
+<script>
+  const nameInput = document.getElementById('name');
+  const ageInput = document.getElementById('age');
+  const dobInput = document.getElementById('dob');
+  const addressInput = document.getElementById('address');
+  const mnoInput = document.getElementById('mno');
+  const alnoInput = document.getElementById('alno');
+  const submitBtn = document.getElementById('submit');
+
+  submitBtn.onclick = function () {
+    const person = {
+      name: nameInput.value,
+      age: ageInput.value,
+      dob: dobInput.value,
+      address: addressInput.value,
+      mobileNo: mnoInput.value,
+      alternateMobileNo: alnoInput.value
+    };
+
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(person)
+    };
+
+    //   fetch('http://localhost:7500/setData', options)
+    //     .then(res => res.json())
+    //     .then(data => console.log('Response from server:', data))
+    //     .catch(err => console.error("Error:", err));
+    // };
+
+    fetch('http://localhost:7500/setData',options)
+    .then(res => res.json())
+    .then(data => console.log("Response from backend:",data))
+    .catch(err => console.log(err));
+  };
+</script>
+
+</body>
+</html>
